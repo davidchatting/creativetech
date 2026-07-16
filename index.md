@@ -1,5 +1,4 @@
-<html>
-  <pre>Preferable Pasts, Presents, and Futures of Creative Technology
+Preferable Pasts, Presents, and Futures of Creative Technology
 
 Creative Technology has emerged over the past two decades as a design-led field that combines art, design, computation, and making to create new forms of interactive experiences centred on materialising computational processes and data. This one-day workshop invites researchers, designers, artists, educators, students, and practitioners to reflect on the past, present, and future of Creative Technology and collectively imagine preferable futures for the field.
   
@@ -10,5 +9,3 @@ We invite submissions from individuals interested in Creative Technology practic
 Submissions will be reviewed by the workshop organizers based on relevance, and potential contribution to discussion. Accepted submissions will be published via the workshop website: creativetech.davidchatting.com
 
 At least one author of each accepted submission must attend the workshop online or in person, and all participants must register for both the workshop and the conference.
-</pre>
-</html>
