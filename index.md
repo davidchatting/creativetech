@@ -1,7 +1,8 @@
 # Preferable Pasts, Presents, and Futures of Creative Technology
 
-One-day workshop on Sunday, 1st November at [BritCHI 2026](https://www.britchi.uk) - [Brunel, University of London](https://www.brunel.ac.uk).
-Submission deadline 13th August (AoE) - notification on or before 27th August.
+**One-day workshop on Sunday, 1st November at [BritCHI 2026](https://www.britchi.uk) - [Brunel, University of London](https://www.brunel.ac.uk).**
+
+**Submission deadline 13th August (AoE) - notification on or before 27th August.**
 
 Over the past two decades, Creative Technology has emerged as a hybrid professional field shaped largely by art and design practices. Creative Technology’s successes have included open hardware platforms and open creative coding environments that have enabled new forms of artistic, civic, and educational experimentation, as well as enriching the tools available to the parallel amateur hobbyist and maker communities. At a time when Silicon Valley agendas seem complicit in limiting creative possibility, we instead see a preferable future in which the philosophy of Creative Technology can support critical and engaged relationships with complex systems and technologies, embracing uncertainty, messiness, and self-expression.
 
