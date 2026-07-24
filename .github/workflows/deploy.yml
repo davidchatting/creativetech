@@ -33,6 +33,21 @@ jobs:
           cp "Preferable_Pasts__Presents__and_Futures_of_Creative_Technology.pdf" dist/
           cp CNAME dist/
           cp -r js dist/
+          cp og.html dist/
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate social share thumbnail
+        run: |
+          npm init -y >/dev/null
+          npm install playwright >/dev/null
+          npx playwright install --with-deps chromium
+          python3 -m http.server 8080 --directory dist &
+          sleep 2
+          node scripts/screenshot-og.mjs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
