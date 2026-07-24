@@ -27,7 +27,10 @@
   }
   h1 { font-size: 1.6em; line-height: 1.3; }
   a { color: #0645ad; }
-  em { opacity: 0.75; }
+  em { color: #888; font-style: normal; }
+  @media (prefers-color-scheme: dark) {
+    em { color: #999; }
+  }
   #p5-overlay {
     position: fixed;
     inset: 0;
@@ -45,6 +48,7 @@
 <div id="content">
 $body$
 </div>
-<script type="module" src="js/main.js"></script>
+<script type="module" src="js/sketch.js"></script>
+<script type="module" src="js/email.js"></script>
 </body>
 </html>
