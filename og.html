@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Preferable Pasts, Presents, and Futures of Creative Technology</title>
+<style>
+  body {
+    margin: 0;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    font-family: "Courier New", Courier, monospace;
+    color: #1a1a1a;
+    background: #fff;
+    display: flex;
+    align-items: center;
+  }
+  #content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2em 4em;
+    background: rgba(255, 255, 255, 0.85);
+  }
+  h1 { font-size: 2.6em; line-height: 1.25; margin: 0 0 0.3em; }
+  p { margin: 0; color: #888; font-size: 1.4em; }
+  #p5-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  #p5-overlay canvas { display: block; }
+</style>
+</head>
+<body>
+<div id="p5-overlay"></div>
+<div id="content">
+  <h1>Preferable Pasts, Presents, and Futures of Creative Technology</h1>
+  <p>BritCHI 2026 workshop</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/p5@2.3.1/lib/p5.min.js"></script>
+<script src="js/sketch.js"></script>
+</body>
+</html>
