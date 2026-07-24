@@ -1,5 +1,3 @@
-import p5 from "https://cdn.jsdelivr.net/npm/p5@2.3.1/lib/p5.esm.min.js";
-
 const STROKE_COLOR = [0, 0, 0];
 const STROKE_WEIGHT = 2;
 
@@ -18,49 +16,30 @@ const PERCEPTION = {
   fear: BOID_RADIUS * 5,
 };
 
-const pointer = { x: 0, y: 0, active: false };
-
-const setPointerActive = (e) => {
-  pointer.x = e.clientX;
-  pointer.y = e.clientY;
-  pointer.active = true;
-};
-
-const setPointerInactive = () => {
-  pointer.active = false;
-};
-
-window.addEventListener("pointermove", setPointerActive);
-window.addEventListener("pointerdown", setPointerActive);
-window.addEventListener("pointerup", setPointerInactive);
-window.addEventListener("pointercancel", setPointerInactive);
-window.addEventListener("pointerleave", setPointerInactive);
+let flock;
 
 class Boid {
-  constructor(p, x, y) {
-    this.p = p;
-    this.position = p.createVector(x, y);
-    const angle = p.random(p.TWO_PI);
-    this.velocity = p.createVector(Math.cos(angle), Math.sin(angle));
-    this.velocity.mult(p.random(1.8, 3.6));
-    this.acceleration = p.createVector(0, 0);
+  constructor(x, y) {
+    this.position = createVector(x, y);
+    const angle = random(TWO_PI);
+    this.velocity = createVector(Math.cos(angle), Math.sin(angle));
+    this.velocity.mult(random(1.8, 3.6));
+    this.acceleration = createVector(0, 0);
     this.fleeing = false;
   }
 
   edges() {
-    const p = this.p;
-    if (this.position.x > p.width) this.position.x = 0;
-    else if (this.position.x < 0) this.position.x = p.width;
-    if (this.position.y > p.height) this.position.y = 0;
-    else if (this.position.y < 0) this.position.y = p.height;
+    if (this.position.x > width) this.position.x = 0;
+    else if (this.position.x < 0) this.position.x = width;
+    if (this.position.y > height) this.position.y = 0;
+    else if (this.position.y < 0) this.position.y = height;
   }
 
   align(boids) {
-    const p = this.p;
-    const steering = p.createVector();
+    const steering = createVector();
     let total = 0;
     for (const other of boids) {
-      const d = p.dist(this.position.x, this.position.y, other.position.x, other.position.y);
+      const d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
       if (other !== this && d < PERCEPTION.alignment) {
         steering.add(other.velocity);
         total++;
@@ -76,11 +55,10 @@ class Boid {
   }
 
   cohesion(boids) {
-    const p = this.p;
-    const steering = p.createVector();
+    const steering = createVector();
     let total = 0;
     for (const other of boids) {
-      const d = p.dist(this.position.x, this.position.y, other.position.x, other.position.y);
+      const d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
       if (other !== this && d < PERCEPTION.cohesion) {
         steering.add(other.position);
         total++;
@@ -97,11 +75,10 @@ class Boid {
   }
 
   separation(boids) {
-    const p = this.p;
-    const steering = p.createVector();
+    const steering = createVector();
     let total = 0;
     for (const other of boids) {
-      const d = p.dist(this.position.x, this.position.y, other.position.x, other.position.y);
+      const d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
       if (other !== this && d < PERCEPTION.separation) {
         const diff = this.position.copy().sub(other.position);
         diff.div(d * d);
@@ -119,12 +96,11 @@ class Boid {
   }
 
   flee(px, py) {
-    const p = this.p;
-    const d = p.dist(this.position.x, this.position.y, px, py);
-    const steering = p.createVector(0, 0);
+    const d = dist(this.position.x, this.position.y, px, py);
+    const steering = createVector(0, 0);
     this.fleeing = d < PERCEPTION.fear;
     if (this.fleeing && d > 0) {
-      const away = this.position.copy().sub(p.createVector(px, py));
+      const away = this.position.copy().sub(createVector(px, py));
       away.setMag(FLEE_SPEED);
       away.sub(this.velocity);
       away.limit(FLEE_FORCE);
@@ -134,13 +110,12 @@ class Boid {
   }
 
   wander() {
-    const p = this.p;
-    const jitter = p.createVector(p.random(-1, 1), p.random(-1, 1));
+    const jitter = createVector(random(-1, 1), random(-1, 1));
     jitter.mult(WANDER_FORCE);
     return jitter;
   }
 
-  flock(boids, pointer) {
+  flock(boids, pointerActive) {
     const alignment = this.align(boids);
     const cohesion = this.cohesion(boids);
     const separation = this.separation(boids);
@@ -153,8 +128,8 @@ class Boid {
     this.acceleration.add(alignment);
     this.acceleration.add(cohesion);
 
-    if (pointer.active) {
-      this.acceleration.add(this.flee(pointer.x, pointer.y));
+    if (pointerActive) {
+      this.acceleration.add(this.flee(mouseX, mouseY));
     } else {
       this.fleeing = false;
     }
@@ -170,56 +145,50 @@ class Boid {
   }
 
   show() {
-    const p = this.p;
-    p.push();
-    p.translate(this.position.x, this.position.y);
-    p.rotate(this.velocity.heading());
-    p.noFill();
-    p.stroke(...STROKE_COLOR);
-    p.strokeWeight(STROKE_WEIGHT);
-    p.beginShape();
-    p.vertex(8 * BOID_SCALE, 0);
-    p.vertex(-6 * BOID_SCALE, -4 * BOID_SCALE);
-    p.vertex(-6 * BOID_SCALE, 4 * BOID_SCALE);
-    p.endShape(p.CLOSE);
-    p.pop();
+    push();
+    translate(this.position.x, this.position.y);
+    rotate(this.velocity.heading());
+    noFill();
+    stroke(...STROKE_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+    beginShape();
+    vertex(8 * BOID_SCALE, 0);
+    vertex(-6 * BOID_SCALE, -4 * BOID_SCALE);
+    vertex(-6 * BOID_SCALE, 4 * BOID_SCALE);
+    endShape(CLOSE);
+    pop();
   }
 }
 
 class Flock {
-  constructor(p, size) {
+  constructor(size) {
     this.boids = [];
     for (let i = 0; i < size; i++) {
-      this.boids.push(new Boid(p, p.random(p.width), p.random(p.height)));
+      this.boids.push(new Boid(random(width), random(height)));
     }
   }
 
-  run(pointer) {
+  run(pointerActive) {
     for (const boid of this.boids) {
       boid.edges();
-      boid.flock(this.boids, pointer);
+      boid.flock(this.boids, pointerActive);
       boid.update();
       boid.show();
     }
   }
 }
 
-function sketch(p) {
-  let flock;
-
-  p.setup = () => {
-    p.createCanvas(p.windowWidth, p.windowHeight).parent("p5-overlay");
-    flock = new Flock(p, FLOCK_SIZE);
-  };
-
-  p.draw = () => {
-    p.clear();
-    flock.run(pointer);
-  };
-
-  p.windowResized = () => {
-    p.resizeCanvas(p.windowWidth, p.windowHeight);
-  };
+function setup() {
+  createCanvas(windowWidth, windowHeight).parent("p5-overlay");
+  flock = new Flock(FLOCK_SIZE);
 }
 
-new p5(sketch);
+function draw() {
+  clear();
+  const pointerActive = mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height;
+  flock.run(pointerActive);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
