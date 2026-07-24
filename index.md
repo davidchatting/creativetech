@@ -17,4 +17,4 @@ At least one participant for each accepted submission must attend the workshop o
 
 For full details of the workshop, please [read our proposal](Preferable_Pasts__Presents__and_Futures_of_Creative_Technology.pdf). Any questions should be addressed to <span data-email>the organisers</span>.
 
-*The boids flocking animation is a [p5.js sketch](https://github.com/davidchatting/creativetech/blob/main/js/sketch.js) implementing [Craig Reynolds'](https://www.red3d.com/cwr/boids/) algorithm.*
+*The boids flocking animation is a [p5.js sketch](https://editor.p5js.org/davidchatting/sketches/VA0wyzVQH) implementing [Craig Reynolds'](https://www.red3d.com/cwr/boids/) algorithm.*
