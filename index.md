@@ -12,3 +12,5 @@ We ask you to bring three artefacts to the workshop that represent your personal
 At least one participant for each accepted submission must attend the workshop online or in person. There are [registration options](https://www.britchi.uk/attendees/registration/) available for the full conference, including just for the workshop. Registration closes on 16th October, with Early Bird discounts available until 10th September.
 
 For full details of the workshop, please [read our proposal](Preferable_Pasts__Presents__and_Futures_of_Creative_Technology.pdf). Any questions should be addressed to creativetech@davidchatting.com
+
+*The boids flocking behind this page are a small [p5.js sketch](https://github.com/davidchatting/creativetech/blob/main/js/sketch.js) implementing [Craig Reynolds'](https://www.red3d.com/cwr/boids/) flocking algorithm.*
